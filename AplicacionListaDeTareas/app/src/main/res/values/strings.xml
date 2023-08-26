@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AplicacionListaDeTareas</string>
+    <string name="mensajePrincipal">Bienvenido, Fer</string>
+    <string name="category">Category</string>
 </resources>
