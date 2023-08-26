@@ -2,4 +2,5 @@
     <string name="app_name">AplicacionListaDeTareas</string>
     <string name="mensajePrincipal">Bienvenido, Fer</string>
     <string name="category">Category</string>
+    <string name="a_adir_tarea">Añadir Tarea</string>
 </resources>
