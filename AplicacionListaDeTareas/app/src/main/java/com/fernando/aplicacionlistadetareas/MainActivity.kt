@@ -93,8 +93,8 @@ class MainActivity : AppCompatActivity() {
         categoriesAdapter = CategoriesAdapter(categories)
         rvCategories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
         rvCategories.adapter = categoriesAdapter
-
-        tasksAdapter = TasksAdapter(tasks)
+        // Le pasamos una funcion landa para que lance una accion por cada item que seleccionemos
+        tasksAdapter = TasksAdapter(tasks) {position -> onItemSelected(position)}
         // Por defecto es Vertical, por lo tanto lo dejamos asi
         rvTasks.layoutManager = LinearLayoutManager(this)
         rvTasks.adapter = tasksAdapter
@@ -108,6 +108,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    // Llamada de un item del RecyclerView
+    private fun onItemSelected(position: Int){
+        tasks[position].isSelected = !tasks[position].isSelected
+        updateTasks()
+    }
     private fun updateTasks(){
         tasksAdapter.notifyDataSetChanged()
     }
