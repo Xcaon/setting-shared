@@ -9,9 +9,22 @@ class CategoriesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val tvCategoryName: TextView = view.findViewById(R.id.tvCategoryName)
     private val divider: View = view.findViewById(R.id.divider)
+    private val viewContainer: View = view.findViewById(R.id.viewContainer)
 
-    fun render(taskCategory: TaskCategory){
+    fun render(taskCategory: TaskCategory, OnItemSelected: (Int) -> Unit){
         tvCategoryName.text = "Ejemplo"
+
+        var color = if (taskCategory.isSelected){
+            R.color.todo_background_card
+        } else {
+            R.color.todo_background_disabled
+        }
+
+        viewContainer.setBackgroundColor(ContextCompat.getColor(viewContainer.context, color))
+
+        itemView.setOnClickListener {
+            OnItemSelected(layoutPosition)
+        }
 
         when (taskCategory){
             TaskCategory.Business -> {

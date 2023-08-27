@@ -90,11 +90,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        categoriesAdapter = CategoriesAdapter(categories)
+        categoriesAdapter = CategoriesAdapter(categories) { position -> updateCategories(position)}
         rvCategories.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
         rvCategories.adapter = categoriesAdapter
-        // Le pasamos una funcion landa para que lance una accion por cada item que seleccionemos
+
+        // Hace la llamada a la funcion landa y cuando le devuelve, llama al metodo onItemSelected
         tasksAdapter = TasksAdapter(tasks) {position -> onItemSelected(position)}
+
+
         // Por defecto es Vertical, por lo tanto lo dejamos asi
         rvTasks.layoutManager = LinearLayoutManager(this)
         rvTasks.adapter = tasksAdapter
@@ -108,12 +111,28 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    // Llamada de un item del RecyclerView
+    // Cuando se ejecuta en onClickListener en un item, entonces llama a esta funcion
     private fun onItemSelected(position: Int){
+        // Si esta seleccionado, lo desele
         tasks[position].isSelected = !tasks[position].isSelected
+       // Llamado al metodo para avisar al Adapter de que actualice la vista
         updateTasks()
     }
+
+    private fun updateCategories(position: Int){
+        categories[position].isSelected = !categories[position].isSelected
+        categoriesAdapter.notifyItemChanged(position)
+        updateTasks()
+    }
+
     private fun updateTasks(){
+        // Seleccioname las categorias que esten seleccionadas
+        val selectedCategories: List<TaskCategory> = categories.filter { it.isSelected }
+        val newTasks = tasks.filter { selectedCategories.contains(it.category) }
+        tasksAdapter.tasks = newTasks
+
+        // Esta funcion actualiza todos los datos, depende del caso,
+        // debemos usar una funcion u otra
         tasksAdapter.notifyDataSetChanged()
     }
 

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 // onTaskSelected nos permite devolver el index del elemento seleccionado y trabajar con el
-class TasksAdapter(private val tasks: List<Task>, private val onTaskSeleced: (Int) -> Unit) :
+class TasksAdapter( var tasks: List<Task>, private val onTaskSeleced: (Int) -> Unit) :
     RecyclerView.Adapter<TasksViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksViewHolder {
         val view =
@@ -17,7 +17,7 @@ class TasksAdapter(private val tasks: List<Task>, private val onTaskSeleced: (In
         // Rellenamos los items con lo que le digamos en el ViewHolder
         holder.render(tasks[position])
 
-        // En cada vista del recycler, va a tener un listener
+        // cada item tendra un listener
         holder.itemView.setOnClickListener {
             // Llamamos a la funcion landa pasandole la posicion
             onTaskSeleced(position)
