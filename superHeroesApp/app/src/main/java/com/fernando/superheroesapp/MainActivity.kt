@@ -1,10 +1,13 @@
 package com.fernando.superheroesapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.fernando.superheroesapp.DettailsSuperheroActivity.Companion.EXTRA_ID
 import com.fernando.superheroesapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     // Configuramos el binding
     private lateinit var binding: ActivityMainBinding
     private lateinit var retrofit: Retrofit
+
+    private lateinit var adapter:SuperheroAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
         )
+
+
+        adapter = SuperheroAdapter{navigateToDetail(it)}
+        binding.rvHeroes.setHasFixedSize(true)
+        binding.rvHeroes.layoutManager = LinearLayoutManager(this)
+        binding.rvHeroes.adapter = adapter
+
     }
 
     // Llamamos a esta funcion para conseguir los datos de la API
@@ -56,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                     Log.i("Fernando" , response.toString())
                     // Las vistas se modifican en el hilo secundario por lo tanto debemos usar
                     runOnUiThread {
+                        adapter.updatelist(response.superHeroes)
                         binding.progressBar.isVisible = false
                     }
                 }
@@ -75,6 +88,13 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         return retrofit
+    }
+
+
+    private fun navigateToDetail(id: String) {
+        val intent = Intent(this, DettailsSuperheroActivity::class.java)
+        intent.putExtra(EXTRA_ID, id)
+        startActivity(intent)
     }
 
 }

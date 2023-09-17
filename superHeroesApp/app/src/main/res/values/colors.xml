@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="superhero_item_name">#2196F3</color>
+
+    <color name="superhero_stat_intelligence">#9C27B0</color>
+    <color name="superhero_stat_strength">#4CAF50</color>
+    <color name="superhero_stat_speed">#E24D4D</color>
+    <color name="superhero_stat_durability">#FF9800</color>
+    <color name="superhero_stat_power">#2196F3</color>
+    <color name="superhero_stat_combat">#9C27B0</color>
+
 </resources>
