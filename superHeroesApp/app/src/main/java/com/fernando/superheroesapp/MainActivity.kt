@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         binding.progressBar.isVisible = true
         // Corrutinas ira en el hilo secundario
         CoroutineScope(Dispatchers.IO).launch {
-            // Creamos una instancia de retrofit para hacer una consulta
+            // Llamamos al api service
             val myResponse : Response<SuperHeroDataResponse> = retrofit.create(ApiService::class.java).getSuperheroes(query)
             if (myResponse.isSuccessful){
                 val response: SuperHeroDataResponse? = myResponse.body()
