@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    Setting-->
+    <color name="settings_text_title">#000000</color>
+    <color name="settings_text_title_night">#FFFFFF</color>
 </resources>

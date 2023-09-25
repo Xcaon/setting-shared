@@ -28,10 +28,11 @@
             >
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4C4C4C"
-                android:text="Titulo"></TextView>
+                style="@style/Base.Theme.AplicacionSettings"
+                android:text="Dark Mode"></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swichDarkMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -72,9 +74,10 @@
             >
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4C4C4C"
+                style="@style/Base.Theme.AplicacionSettings"
                 android:text="Bluetooth"></TextView>
 
             <TextView
@@ -86,6 +89,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchBluetooth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -125,10 +129,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4C4C4C"
+                style="@style/Base.Theme.AplicacionSettings"
                 android:text="Volumen"></TextView>
 
             <com.google.android.material.slider.RangeSlider
+                android:id="@+id/rsVolume"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:valueFrom="0"
@@ -161,12 +166,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:textColor="#4C4C4C"
-                android:text="Bluetooth"></TextView>
+                style="@style/Base.Theme.AplicacionSettings"
+                android:text="Vibration"></TextView>
 
 
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/SwitchVibration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
