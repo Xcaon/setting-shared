@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var retrofit: Retrofit
 
-    private lateinit var adapter:SuperheroAdapter
+    private lateinit var adapter: SuperheroAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +33,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
-        {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchByName(query.orEmpty())
                 return false
             }
+
             // Un listener a la vez que vamos escribiendo, pero no vamos a usarlo en este momento
             // lo dejamos en false porque no podemos quitar la funcion
             override fun onQueryTextChange(newText: String?): Boolean {
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         )
 
 
-        adapter = SuperheroAdapter{navigateToDetail(it)}
+        adapter = SuperheroAdapter { navigateToDetail(it) }
         binding.rvHeroes.setHasFixedSize(true)
         binding.rvHeroes.layoutManager = LinearLayoutManager(this)
         binding.rvHeroes.adapter = adapter
@@ -61,11 +61,12 @@ class MainActivity : AppCompatActivity() {
         // Corrutinas ira en el hilo secundario
         CoroutineScope(Dispatchers.IO).launch {
             // Llamamos al api service
-            val myResponse : Response<SuperHeroDataResponse> = retrofit.create(ApiService::class.java).getSuperheroes(query)
-            if (myResponse.isSuccessful){
+            val myResponse: Response<SuperHeroDataResponse> =
+                retrofit.create(ApiService::class.java).getSuperheroes(query)
+            if (myResponse.isSuccessful) {
                 val response: SuperHeroDataResponse? = myResponse.body()
-                if (response != null){
-                    Log.i("Fernando" , response.toString())
+                if (response != null) {
+                    Log.i("Fernando", response.toString())
                     // Las vistas se modifican en el hilo secundario por lo tanto debemos usar
                     runOnUiThread {
                         adapter.updatelist(response.superHeroes)
